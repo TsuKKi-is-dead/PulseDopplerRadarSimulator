@@ -1,10 +1,21 @@
-# Build artifacts
+# Build directory
 build/
-*.o
-*.out
 
 # Output data
 data/
+
+# Compiled objects
+*.o
+*.out
+
+# CMake temporary files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+compile_commands.json
 
 # MacOS
 .DS_Store
@@ -12,3 +23,7 @@ data/
 # Python
 __pycache__/
 *.pyc
+*.pyo
+
+# Logs
+*.log
