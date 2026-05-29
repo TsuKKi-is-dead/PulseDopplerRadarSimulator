@@ -11,7 +11,8 @@ void Visualizer::plot(const std::vector<std::vector<double>>& rdMap,
     std::cout << "\n=== Detected Targets ===\n";
     for (const auto& d : detections) {
         std::cout << "Enemy Aircraft -> Range: " << std::fixed << std::setprecision(1)
-                  << d.range / 1000 << " km | Velocity: " << d.velocity << " m/s | SNR: " << d.snr << "\n";
+                  << d.range / 1000 << " km | Velocity: " << d.velocity 
+                  << " m/s | SNR: " << d.snr << "\n";
     }
 
     std::cout << "\n=== Tracked Targets ===\n";
@@ -20,9 +21,9 @@ void Visualizer::plot(const std::vector<std::vector<double>>& rdMap,
                   << " km | Velocity: " << t.velocity << " m/s\n";
     }
 
-    // Export Range-Doppler map for Python
+    // Always save CSV for Python plot
     std::ofstream csv("data/range_doppler.csv");
-    if (csv.is_open()) {
+    if (csv.is_open() && !rdMap.empty()) {
         for (const auto& row : rdMap) {
             for (size_t i = 0; i < row.size(); ++i) {
                 csv << row[i];
@@ -30,7 +31,8 @@ void Visualizer::plot(const std::vector<std::vector<double>>& rdMap,
             }
             csv << "\n";
         }
-        csv.close();
         std::cout << "✅ Range-Doppler map saved to data/range_doppler.csv\n";
+    } else {
+        std::cout << "✅ CSV export skipped (map empty)\n";
     }
 }
